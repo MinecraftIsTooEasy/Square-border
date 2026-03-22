@@ -6,7 +6,6 @@ import net.minecraft.Block;
 import net.minecraft.EntityPlayer;
 import net.minecraft.RaycastCollision;
 import net.minecraft.RenderGlobal;
-import net.minecraft.Tessellator;
 import net.minecraft.WorldClient;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Replaces selected block outline rendering with a configurable gradient.
+ * Replaces selected block outline rendering with a configurable outline style.
  */
 @Mixin(RenderGlobal.class)
 public class RenderGlobalMixin {
@@ -49,46 +48,10 @@ public class RenderGlobalMixin {
                 .getSelectedBoundingBoxFromPool(this.theWorld, rc.block_hit_x, rc.block_hit_y, rc.block_hit_z)
                 .expand(expand, expand, expand)
                 .getOffsetBoundingBox(-px, -py, -pz);
-        drawGradientOutlinedBoundingBox(box);
+        SelectionBoxStyle.drawOutlinedBoundingBox(box);
 
         GL11.glDepthMask(true);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
-    }
-
-    private static void drawGradientOutlinedBoundingBox(AxisAlignedBB box) {
-        Tessellator var2 = Tessellator.instance;
-        float time = SelectionBoxStyle.getAnimationProgress();
-
-        var2.startDrawing(3);
-        addColorVertex(var2, box.minX, box.minY, box.minZ, time, 0.0F);
-        addColorVertex(var2, box.maxX, box.minY, box.minZ, time, 0.25F);
-        addColorVertex(var2, box.maxX, box.minY, box.maxZ, time, 0.5F);
-        addColorVertex(var2, box.minX, box.minY, box.maxZ, time, 0.75F);
-        addColorVertex(var2, box.minX, box.minY, box.minZ, time, 1.0F);
-        var2.draw();
-
-        var2.startDrawing(3);
-        addColorVertex(var2, box.minX, box.maxY, box.minZ, time, 0.125F);
-        addColorVertex(var2, box.maxX, box.maxY, box.minZ, time, 0.375F);
-        addColorVertex(var2, box.maxX, box.maxY, box.maxZ, time, 0.625F);
-        addColorVertex(var2, box.minX, box.maxY, box.maxZ, time, 0.875F);
-        addColorVertex(var2, box.minX, box.maxY, box.minZ, time, 0.125F);
-        var2.draw();
-
-        var2.startDrawing(1);
-        addColorVertex(var2, box.minX, box.minY, box.minZ, time, 0.0F);
-        addColorVertex(var2, box.minX, box.maxY, box.minZ, time, 0.0F);
-        addColorVertex(var2, box.maxX, box.minY, box.minZ, time, 0.25F);
-        addColorVertex(var2, box.maxX, box.maxY, box.minZ, time, 0.25F);
-        addColorVertex(var2, box.maxX, box.minY, box.maxZ, time, 0.5F);
-        addColorVertex(var2, box.maxX, box.maxY, box.maxZ, time, 0.5F);
-        addColorVertex(var2, box.minX, box.minY, box.maxZ, time, 0.75F);
-        addColorVertex(var2, box.minX, box.maxY, box.maxZ, time, 0.75F);
-        var2.draw();
-    }
-
-    private static void addColorVertex(Tessellator tessellator, double x, double y, double z, float timeBase, float offset) {
-        SelectionBoxStyle.addGradientVertex(tessellator, x, y, z, timeBase, offset);
     }
 }

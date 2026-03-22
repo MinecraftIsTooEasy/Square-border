@@ -1,7 +1,10 @@
 package com.m.selectionbox.render;
 
+import com.m.selectionbox.config.EntityHitboxRenderMode;
 import com.m.selectionbox.config.GradientInterpolationMode;
+import com.m.selectionbox.config.OutlineColorMode;
 import com.m.selectionbox.config.SelectionBoxConfig;
+import net.minecraft.AxisAlignedBB;
 import net.minecraft.Tessellator;
 
 import java.awt.Color;
@@ -18,6 +21,14 @@ public final class SelectionBoxStyle {
         return SelectionBoxConfig.ENABLE_ENTITY_OUTLINE.getBooleanValue();
     }
 
+    public static boolean renderEntityOutlineBeforeEntity() {
+        return renderEntityOutline() && SelectionBoxConfig.ENTITY_HITBOX_RENDER_MODE.getEnumValue() == EntityHitboxRenderMode.OLD;
+    }
+
+    public static boolean renderEntityOutlineAfterEntity() {
+        return renderEntityOutline() && SelectionBoxConfig.ENTITY_HITBOX_RENDER_MODE.getEnumValue() == EntityHitboxRenderMode.MODERN;
+    }
+
     public static float getLineWidth() {
         return (float) Math.max(2.0D, SelectionBoxConfig.LINE_WIDTH.getDoubleValue());
     }
@@ -29,9 +40,40 @@ public final class SelectionBoxStyle {
         return (float) progress;
     }
 
-    public static void addGradientVertex(Tessellator tessellator, double x, double y, double z, float timeBase, float gradientOffset) {
-        float position = wrap01(timeBase + gradientOffset);
-        int rgb = interpolateColor(position);
+    public static void drawOutlinedBoundingBox(AxisAlignedBB box) {
+        Tessellator tessellator = Tessellator.instance;
+        float time = getAnimationProgress();
+
+        tessellator.startDrawing(3);
+        addOutlineVertex(tessellator, box.minX, box.minY, box.minZ, time, 0.0F);
+        addOutlineVertex(tessellator, box.maxX, box.minY, box.minZ, time, 0.25F);
+        addOutlineVertex(tessellator, box.maxX, box.minY, box.maxZ, time, 0.5F);
+        addOutlineVertex(tessellator, box.minX, box.minY, box.maxZ, time, 0.75F);
+        addOutlineVertex(tessellator, box.minX, box.minY, box.minZ, time, 1.0F);
+        tessellator.draw();
+
+        tessellator.startDrawing(3);
+        addOutlineVertex(tessellator, box.minX, box.maxY, box.minZ, time, 0.125F);
+        addOutlineVertex(tessellator, box.maxX, box.maxY, box.minZ, time, 0.375F);
+        addOutlineVertex(tessellator, box.maxX, box.maxY, box.maxZ, time, 0.625F);
+        addOutlineVertex(tessellator, box.minX, box.maxY, box.maxZ, time, 0.875F);
+        addOutlineVertex(tessellator, box.minX, box.maxY, box.minZ, time, 0.125F);
+        tessellator.draw();
+
+        tessellator.startDrawing(1);
+        addOutlineVertex(tessellator, box.minX, box.minY, box.minZ, time, 0.0F);
+        addOutlineVertex(tessellator, box.minX, box.maxY, box.minZ, time, 0.0F);
+        addOutlineVertex(tessellator, box.maxX, box.minY, box.minZ, time, 0.25F);
+        addOutlineVertex(tessellator, box.maxX, box.maxY, box.minZ, time, 0.25F);
+        addOutlineVertex(tessellator, box.maxX, box.minY, box.maxZ, time, 0.5F);
+        addOutlineVertex(tessellator, box.maxX, box.maxY, box.maxZ, time, 0.5F);
+        addOutlineVertex(tessellator, box.minX, box.minY, box.maxZ, time, 0.75F);
+        addOutlineVertex(tessellator, box.minX, box.maxY, box.maxZ, time, 0.75F);
+        tessellator.draw();
+    }
+
+    public static void addOutlineVertex(Tessellator tessellator, double x, double y, double z, float timeBase, float gradientOffset) {
+        int rgb = resolveColor(timeBase, gradientOffset);
         float alpha = clamp01(SelectionBoxConfig.ALPHA.getIntegerValue() / 255.0F);
 
         float red = ((rgb >> 16) & 0xFF) / 255.0F;
@@ -41,9 +83,22 @@ public final class SelectionBoxStyle {
         tessellator.addVertex(x, y, z);
     }
 
+    private static int resolveColor(float timeBase, float gradientOffset) {
+        if (SelectionBoxConfig.COLOR_MODE.getEnumValue() == OutlineColorMode.SOLID) {
+            return SelectionBoxConfig.SOLID_COLOR.getColorInteger() & 0x00FFFFFF;
+        }
+
+        float position = wrap01(timeBase + gradientOffset);
+        return interpolateColor(position);
+    }
+
     private static int interpolateColor(float t) {
         int start = SelectionBoxConfig.START_COLOR.getColorInteger();
         int end = SelectionBoxConfig.END_COLOR.getColorInteger();
+        return interpolateBetween(start, end, t);
+    }
+
+    private static int interpolateBetween(int start, int end, float t) {
         GradientInterpolationMode mode = SelectionBoxConfig.INTERPOLATION_MODE.getEnumValue();
         if (mode == GradientInterpolationMode.HSV) {
             return interpolateHsv(start, end, t);

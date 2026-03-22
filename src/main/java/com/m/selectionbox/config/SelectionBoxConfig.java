@@ -25,11 +25,17 @@ public final class SelectionBoxConfig extends SimpleConfigs {
             new ConfigBoolean("selectionBox.enableBlockOutline", true, "Render colored block selection outlines.");
     public static final ConfigBoolean ENABLE_ENTITY_OUTLINE =
             new ConfigBoolean("selectionBox.enableEntityOutline", true, "Render colored F3+B entity outlines.");
+    public static final ConfigEnum<EntityHitboxRenderMode> ENTITY_HITBOX_RENDER_MODE =
+            new ConfigEnum<>("selectionBox.entityHitboxRenderMode", EntityHitboxRenderMode.MODERN, "Render entity hitboxes before entities like old versions or after entities like modern versions.");
+    public static final ConfigEnum<OutlineColorMode> COLOR_MODE =
+            new ConfigEnum<>("selectionBox.colorMode", OutlineColorMode.GRADIENT, "Use an animated gradient or a single solid outline color.");
+    public static final ConfigColor SOLID_COLOR =
+            new ConfigColor("selectionBox.solidColor", "#FFFF4D4D", "The single outline color used in solid mode.");
 
     public static final ConfigColor START_COLOR =
             new ConfigColor("selectionBox.gradientStartColor", "#FFFF4D4D", "Gradient start color.");
     public static final ConfigColor END_COLOR =
-            new ConfigColor("selectionBox.gradientEndColor", "#FF4DD2FF", "Gradient end color.");
+            new ConfigColor("selectionBox.gradientEndColor", "#FF4DD2FF", "Gradient end color. Ignored in solid mode.");
     public static final ConfigEnum<GradientInterpolationMode> INTERPOLATION_MODE =
             new ConfigEnum<>("selectionBox.gradientMode", GradientInterpolationMode.HSV, "RGB or HSV interpolation.");
 
@@ -45,6 +51,9 @@ public final class SelectionBoxConfig extends SimpleConfigs {
         VALUES = List.of(
                 ENABLE_BLOCK_OUTLINE,
                 ENABLE_ENTITY_OUTLINE,
+                ENTITY_HITBOX_RENDER_MODE,
+                COLOR_MODE,
+                SOLID_COLOR,
                 START_COLOR,
                 END_COLOR,
                 INTERPOLATION_MODE,
@@ -56,7 +65,7 @@ public final class SelectionBoxConfig extends SimpleConfigs {
     }
 
     private SelectionBoxConfig(String name, List<ConfigHotkey> hotkeys, List<?> values) {
-        super(name, hotkeys, values, "Configure outline gradient colors, animation and width.");
+        super(name, hotkeys, values, "Configure outline colors, animation, entity hitbox render mode and width.");
     }
 
     public static SelectionBoxConfig getInstance() {

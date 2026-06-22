@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class SelectionBoxMod implements ModInitializer {
-    public static final String MOD_ID = "selectionbox";
+    public static final String MOD_ID = "selection_box";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     @Override

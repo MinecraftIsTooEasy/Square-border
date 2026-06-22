@@ -1,0 +1,145 @@
+config.menu.name.selection_box=Selection Box
+config.menu.comment.selection_box=Configure block selection and entity hitbox highlights.
+selection_box.hotkeys.category.generic_hotkeys=Keyboard Shortcuts
+config.tab.common=Common
+config.tab.common.comment=General toggles, presets, fill modes, visibility, animation, line width, and opacity.
+config.tab.gradient=Gradient
+config.tab.gradient.comment=Gradient colors, interpolation, and cycle speed for block and entity highlights.
+config.tab.solid=Solid
+config.tab.solid.comment=Solid color mode and single-color settings for block and entity highlights.
+config.tab.hotkey=Hotkey
+config.tab.hotkey.comment=Keyboard shortcut settings.
+
+config.name.selectionBox.openConfig=Open Selection Box Config
+config.comment.selectionBox.openConfig=Open this mod's ManyLib config screen.
+
+config.name.selectionBox.enableBlockOutline=Enable Block Highlight
+config.comment.selectionBox.enableBlockOutline=Render the custom selected block highlight.
+
+config.name.selectionBox.enableEntityOutline=Enable Entity Highlight
+config.comment.selectionBox.enableEntityOutline=Render the custom F3+B entity hitbox highlight.
+
+config.name.selectionBox.entityHitboxRenderMode=Entity Hitbox Render Mode
+config.comment.selectionBox.entityHitboxRenderMode=Render entity hitboxes before entities like old versions or after entity rendering like modern versions.
+config.enum.selectionBox.entityHitboxRenderMode.MODERN=Modern
+config.enum.selectionBox.entityHitboxRenderMode.OLD=Old
+
+config.name.selectionBox.blockPreset=Block Preset
+config.comment.selectionBox.blockPreset=Preset style for block selection highlights. Custom uses the manual block settings below.
+config.enum.selectionBox.blockPreset.CUSTOM=Custom
+config.enum.selectionBox.blockPreset.CLASSIC_BLACK=Classic Black
+config.enum.selectionBox.blockPreset.RED_BLUE=Red / Blue
+config.enum.selectionBox.blockPreset.RAINBOW=Rainbow
+config.enum.selectionBox.blockPreset.LOW_ALPHA=Low Alpha
+config.enum.selectionBox.blockPreset.BOLD=Bold
+
+config.name.selectionBox.colorMode=Block Color Mode
+config.comment.selectionBox.colorMode=Gradient animates between the block start and end colors. Solid uses the block single color setting.
+config.enum.selectionBox.colorMode.GRADIENT=Gradient
+config.enum.selectionBox.colorMode.SOLID=Solid
+
+config.name.selectionBox.solidColor=Block Single Color
+config.comment.selectionBox.solidColor=The block highlight color used in Solid mode.
+
+config.name.selectionBox.gradientStartColor=Block Gradient Start
+config.comment.selectionBox.gradientStartColor=Start color of the block gradient.
+
+config.name.selectionBox.gradientEndColor=Block Gradient End
+config.comment.selectionBox.gradientEndColor=End color of the block gradient. Ignored in Solid mode.
+
+config.name.selectionBox.gradientMode=Block Gradient Mode
+config.comment.selectionBox.gradientMode=Interpolation mode between the block start and end colors.
+config.enum.selectionBox.gradientMode.RGB=RGB
+config.enum.selectionBox.gradientMode.HSV=HSV
+
+config.name.selectionBox.cycleSeconds=Block Cycle Seconds
+config.comment.selectionBox.cycleSeconds=Duration of one full block color cycle.
+
+config.name.selectionBox.lineWidth=Block Line Width
+config.comment.selectionBox.lineWidth=Block outline line thickness.
+
+config.name.selectionBox.alpha=Block Alpha
+config.comment.selectionBox.alpha=Block outline opacity. Fill opacity is derived from this value.
+
+config.name.selectionBox.blockFillMode=Block Fill Mode
+config.comment.selectionBox.blockFillMode=Render only the block outline, only the translucent fill, or both.
+config.enum.selectionBox.blockFillMode.OUTLINE_ONLY=Outline Only
+config.enum.selectionBox.blockFillMode.FILL_ONLY=Fill Only
+config.enum.selectionBox.blockFillMode.OUTLINE_AND_FILL=Outline + Fill
+
+config.name.selectionBox.blockOutlineVisibility=Block Outline Visibility
+config.comment.selectionBox.blockOutlineVisibility=Choose whether the block outline respects depth or renders through walls.
+config.enum.selectionBox.blockOutlineVisibility.NORMAL=Normal
+config.enum.selectionBox.blockOutlineVisibility.THROUGH_WALLS=Through Walls
+
+config.name.selectionBox.blockFillVisibility=Block Fill Visibility
+config.comment.selectionBox.blockFillVisibility=Choose whether the block fill respects depth or renders through walls.
+config.enum.selectionBox.blockFillVisibility.NORMAL=Normal
+config.enum.selectionBox.blockFillVisibility.THROUGH_WALLS=Through Walls
+
+config.name.selectionBox.blockAnimationMode=Block Animation Mode
+config.comment.selectionBox.blockAnimationMode=Controls block color motion and alpha breathing.
+config.enum.selectionBox.blockAnimationMode.ANIMATED=Animated
+config.enum.selectionBox.blockAnimationMode.STATIC_GRADIENT=Static Gradient
+config.enum.selectionBox.blockAnimationMode.BREATHING_ALPHA=Breathing Alpha
+config.enum.selectionBox.blockAnimationMode.OFF=Off
+
+config.name.selectionBox.entityPreset=Entity Preset
+config.comment.selectionBox.entityPreset=Preset style for F3+B entity hitbox highlights. Custom uses the manual entity settings below.
+config.enum.selectionBox.entityPreset.CUSTOM=Custom
+config.enum.selectionBox.entityPreset.CLASSIC_BLACK=Classic Black
+config.enum.selectionBox.entityPreset.RED_BLUE=Red / Blue
+config.enum.selectionBox.entityPreset.RAINBOW=Rainbow
+config.enum.selectionBox.entityPreset.LOW_ALPHA=Low Alpha
+config.enum.selectionBox.entityPreset.BOLD=Bold
+
+config.name.selectionBox.entityColorMode=Entity Color Mode
+config.comment.selectionBox.entityColorMode=Gradient animates between the entity start and end colors. Solid uses the entity single color setting.
+config.enum.selectionBox.entityColorMode.GRADIENT=Gradient
+config.enum.selectionBox.entityColorMode.SOLID=Solid
+
+config.name.selectionBox.entitySolidColor=Entity Single Color
+config.comment.selectionBox.entitySolidColor=The entity highlight color used in Solid mode.
+
+config.name.selectionBox.entityGradientStartColor=Entity Gradient Start
+config.comment.selectionBox.entityGradientStartColor=Start color of the entity gradient.
+
+config.name.selectionBox.entityGradientEndColor=Entity Gradient End
+config.comment.selectionBox.entityGradientEndColor=End color of the entity gradient. Ignored in Solid mode.
+
+config.name.selectionBox.entityGradientMode=Entity Gradient Mode
+config.comment.selectionBox.entityGradientMode=Interpolation mode between the entity start and end colors.
+config.enum.selectionBox.entityGradientMode.RGB=RGB
+config.enum.selectionBox.entityGradientMode.HSV=HSV
+
+config.name.selectionBox.entityCycleSeconds=Entity Cycle Seconds
+config.comment.selectionBox.entityCycleSeconds=Duration of one full entity color cycle.
+
+config.name.selectionBox.entityLineWidth=Entity Line Width
+config.comment.selectionBox.entityLineWidth=Entity outline line thickness.
+
+config.name.selectionBox.entityAlpha=Entity Alpha
+config.comment.selectionBox.entityAlpha=Entity outline opacity. Fill opacity is derived from this value.
+
+config.name.selectionBox.entityFillMode=Entity Fill Mode
+config.comment.selectionBox.entityFillMode=Render only the entity outline, only the translucent fill, or both.
+config.enum.selectionBox.entityFillMode.OUTLINE_ONLY=Outline Only
+config.enum.selectionBox.entityFillMode.FILL_ONLY=Fill Only
+config.enum.selectionBox.entityFillMode.OUTLINE_AND_FILL=Outline + Fill
+
+config.name.selectionBox.entityOutlineVisibility=Entity Outline Visibility
+config.comment.selectionBox.entityOutlineVisibility=Choose whether the entity outline respects depth or renders through walls.
+config.enum.selectionBox.entityOutlineVisibility.NORMAL=Normal
+config.enum.selectionBox.entityOutlineVisibility.THROUGH_WALLS=Through Walls
+
+config.name.selectionBox.entityFillVisibility=Entity Fill Visibility
+config.comment.selectionBox.entityFillVisibility=Choose whether the entity fill respects depth or renders through walls.
+config.enum.selectionBox.entityFillVisibility.NORMAL=Normal
+config.enum.selectionBox.entityFillVisibility.THROUGH_WALLS=Through Walls
+
+config.name.selectionBox.entityAnimationMode=Entity Animation Mode
+config.comment.selectionBox.entityAnimationMode=Controls entity color motion and alpha breathing.
+config.enum.selectionBox.entityAnimationMode.ANIMATED=Animated
+config.enum.selectionBox.entityAnimationMode.STATIC_GRADIENT=Static Gradient
+config.enum.selectionBox.entityAnimationMode.BREATHING_ALPHA=Breathing Alpha
+config.enum.selectionBox.entityAnimationMode.OFF=Off

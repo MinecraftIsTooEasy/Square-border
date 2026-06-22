@@ -7,18 +7,25 @@ version = project.mod_version
 group = project.maven_group
 
 base {
-    archivesName = "[方块选中框与实体碰撞箱]"+project.archives_base_name
+    // The name of the generated JAR file.
+    // "[xxxx]" + project.archives_base_name to add an alias
+    archivesName = project.archives_base_name
 }
 
 repositories {
+    // Add repositories to retrieve artifacts from in here.
+    // You should only use this when depending on other mods because
+    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+    // for more information about repositories.
     maven {
         name = "Spongepowered"
         url = "https://repo.spongepowered.org/repository/maven-public/"
-    }//Dependency library(FastUtil, Gson, etc) download source
+    }// Dependency library(FastUtil, Gson, etc) download source
     maven {
         name = "ModdedMITE"
-        url = ("https://maven.limingzxc.top/repository/maven-public/")
-    }
+        url = "https://maven.limingzxc.top/repository/maven-public/"
+    }// Mods & Loaders download source
 }
 
 configurations {
@@ -26,6 +33,7 @@ configurations {
 }
 
 dependencies {
+    // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
@@ -35,24 +43,44 @@ dependencies {
     fml "com.github.MinecraftIsTooEasy:FishModLoader:3.4.2"
     implementation "com.github.MinecraftIsTooEasy:FishModLoader:3.4.2"
 
-    implementation "com.github.MinecraftIsTooEasy:ModernMite:3.7.2"
-    implementation "com.github.MinecraftIsTooEasy:ManyLib:2.3.0"
+    // The most basic dependency library mod, with a status similar to Fabric API
+//    implementation "com.github.MinecraftIsTooEasy:RustedIronCore:1.5.4"
     implementation "com.github.MinecraftIsTooEasy:ModMenu:10.1.1"
+    implementation "com.github.MinecraftIsTooEasy:ManyLib:2.3.1"
+//    localRuntime "com.github.MinecraftIsTooEasy:ModernMITE:3.7.5"
+
+    // To add strong dependencies, use "implementation" like above
+    // To compile mod integrations(e.g. ModMenu), use "compileOnly"
+    // To add mods for running client, use "localRuntime"
 }
 
 def fmlResolvedFile = configurations.fml.files.iterator().next()
 
 loom {
+    accessWidenerPath = file("src/main/resources/selection_box.accesswidener")
     mergedMinecraftJar()
+    setFML(fmlResolvedFile)
+    dependencies.add("mappings", fmlMCPMappings())
     mods {
-        "selectionbox" {
+        "selection_box" {
             sourceSet sourceSets.main
+//            sourceSet sourceSets.client
+//            sourceSet sourceSets.server
+//            For modules in the ’src‘ directory, only the main module is required by default
         }
     }
+    runs {
+        client {
+            String name = project.username
+            String width = project.screen_width
+            String height = project.screen_height
+            programArgs "--userProperties", "{}", "--username", name, "--session", "a.a.a.a", "--width", width, "--height", height
+        }
+//        server {
+//            programArgs "--", ""
+//        }
+    }
 }
-
-loom.setFML(fmlResolvedFile)
-dependencies.add("mappings", loom.fmlMCPMappings())
 
 processResources {
     inputs.property "version", project.version
@@ -67,6 +95,9 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
     withSourcesJar()
 
     sourceCompatibility = JavaVersion.VERSION_17
@@ -74,13 +105,16 @@ java {
 }
 
 jar {
+    inputs.property "archivesName", project.base.archivesName
+
+    if (file("LICENSE").exists()) {
+        from("LICENSE") {
+            rename { "${it}_${inputs.properties.archivesName}" }
+        }
+    }
 }
 
-tasks.named('runClient', JavaExec).configure { exec ->
-    def user = project.hasProperty('username') ? project.username : 'Dev'
-    exec.setArgs(['--username', user, '--session', '0', '--width', '854', '--height', '480'])
-}
-
+// configure the maven publication
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -89,10 +123,22 @@ publishing {
         }
     }
 
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
         // Add repositories to publish to here.
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+
+        // Default Maven Central.
+        maven {
+            name = "ModdedMITE"
+            url = uri("https://maven.limingzxc.top/repository/maven-releases/")
+            credentials {
+                // Read only from gradle.properties (user level, your gradle_home)
+                username = project.findProperty("nexusUsername")
+                password = project.findProperty("nexusPassword")
+            }
+        }
     }
 }

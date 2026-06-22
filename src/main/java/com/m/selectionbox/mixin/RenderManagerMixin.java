@@ -1,6 +1,7 @@
 package com.m.selectionbox.mixin;
 
 import com.m.selectionbox.render.SelectionBoxStyle;
+import com.m.selectionbox.render.SelectionBoxTarget;
 import net.minecraft.AxisAlignedBB;
 import net.minecraft.*;
 import org.lwjgl.opengl.GL11;
@@ -47,29 +48,28 @@ public class RenderManagerMixin {
             y -= entity.yOffset;
         }
 
-        GL11.glDepthMask(false);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_CULL_FACE);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glLineWidth(SelectionBoxStyle.getLineWidth());
+        GL11.glPushAttrib(GL11.GL_ENABLE_BIT | GL11.GL_COLOR_BUFFER_BIT | GL11.GL_CURRENT_BIT | GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_LINE_BIT | GL11.GL_LIGHTING_BIT);
+        try {
+            GL11.glDepthMask(false);
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glDisable(GL11.GL_CULL_FACE);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glLineWidth(SelectionBoxStyle.getLineWidth(SelectionBoxTarget.ENTITY));
 
-        double halfWidth = entity.width / 2.0F;
-        AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
-                x - halfWidth,
-                y,
-                z - halfWidth,
-                x + halfWidth,
-                y + entity.height,
-                z + halfWidth
-        );
-        SelectionBoxStyle.drawOutlinedBoundingBox(box);
-
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDepthMask(true);
+            double halfWidth = entity.width / 2.0F;
+            AxisAlignedBB box = AxisAlignedBB.getBoundingBox(
+                    x - halfWidth,
+                    y,
+                    z - halfWidth,
+                    x + halfWidth,
+                    y + entity.height,
+                    z + halfWidth
+            );
+            SelectionBoxStyle.drawBoundingBox(box, SelectionBoxTarget.ENTITY);
+        } finally {
+            GL11.glPopAttrib();
+        }
     }
 }

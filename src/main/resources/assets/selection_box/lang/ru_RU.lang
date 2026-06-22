@@ -1,0 +1,145 @@
+config.menu.name.selection_box=Рамка выделения
+config.menu.comment.selection_box=Настройка подсветки выделенного блока и хитбоксов сущностей.
+selection_box.hotkeys.category.generic_hotkeys=Горячие клавиши
+config.tab.common=Общее
+config.tab.common.comment=Переключатели, пресеты, заливка, видимость, анимация, толщина линий и прозрачность.
+config.tab.gradient=Градиент
+config.tab.gradient.comment=Цвета градиента, интерполяция и скорость цикла для блоков и сущностей.
+config.tab.solid=Сплошной цвет
+config.tab.solid.comment=Режим сплошного цвета и одиночные цвета для блоков и сущностей.
+config.tab.hotkey=Клавиши
+config.tab.hotkey.comment=Настройки горячих клавиш.
+
+config.name.selectionBox.openConfig=Открыть настройки рамки
+config.comment.selectionBox.openConfig=Открывает экран настроек ManyLib для этого мода.
+
+config.name.selectionBox.enableBlockOutline=Включить подсветку блока
+config.comment.selectionBox.enableBlockOutline=Рисовать пользовательскую подсветку выделенного блока.
+
+config.name.selectionBox.enableEntityOutline=Включить подсветку сущностей
+config.comment.selectionBox.enableEntityOutline=Рисовать пользовательскую подсветку хитбоксов сущностей F3+B.
+
+config.name.selectionBox.entityHitboxRenderMode=Режим рендера хитбоксов
+config.comment.selectionBox.entityHitboxRenderMode=Рисовать хитбоксы перед сущностями как в старых версиях или после рендера сущностей как в современных версиях.
+config.enum.selectionBox.entityHitboxRenderMode.MODERN=Современный
+config.enum.selectionBox.entityHitboxRenderMode.OLD=Старый
+
+config.name.selectionBox.blockPreset=Пресет блока
+config.comment.selectionBox.blockPreset=Готовый стиль подсветки блока. Custom использует ручные настройки блока ниже.
+config.enum.selectionBox.blockPreset.CUSTOM=Пользовательский
+config.enum.selectionBox.blockPreset.CLASSIC_BLACK=Классическая черная
+config.enum.selectionBox.blockPreset.RED_BLUE=Красный / синий
+config.enum.selectionBox.blockPreset.RAINBOW=Радуга
+config.enum.selectionBox.blockPreset.LOW_ALPHA=Низкая прозрачность
+config.enum.selectionBox.blockPreset.BOLD=Жирная
+
+config.name.selectionBox.colorMode=Режим цвета блока
+config.comment.selectionBox.colorMode=Градиент анимирует переход между начальным и конечным цветом блока. Сплошной режим использует одиночный цвет блока.
+config.enum.selectionBox.colorMode.GRADIENT=Градиент
+config.enum.selectionBox.colorMode.SOLID=Сплошной
+
+config.name.selectionBox.solidColor=Одиночный цвет блока
+config.comment.selectionBox.solidColor=Цвет подсветки блока в режиме сплошного цвета.
+
+config.name.selectionBox.gradientStartColor=Начало градиента блока
+config.comment.selectionBox.gradientStartColor=Начальный цвет градиента блока.
+
+config.name.selectionBox.gradientEndColor=Конец градиента блока
+config.comment.selectionBox.gradientEndColor=Конечный цвет градиента блока. Игнорируется в режиме сплошного цвета.
+
+config.name.selectionBox.gradientMode=Режим градиента блока
+config.comment.selectionBox.gradientMode=Способ интерполяции между начальным и конечным цветом блока.
+config.enum.selectionBox.gradientMode.RGB=RGB
+config.enum.selectionBox.gradientMode.HSV=HSV
+
+config.name.selectionBox.cycleSeconds=Цикл блока, секунд
+config.comment.selectionBox.cycleSeconds=Длительность полного цикла цвета блока.
+
+config.name.selectionBox.lineWidth=Толщина линии блока
+config.comment.selectionBox.lineWidth=Толщина линии обводки блока.
+
+config.name.selectionBox.alpha=Прозрачность блока
+config.comment.selectionBox.alpha=Непрозрачность обводки блока. Прозрачность заливки вычисляется из этого значения.
+
+config.name.selectionBox.blockFillMode=Режим заливки блока
+config.comment.selectionBox.blockFillMode=Рисовать только обводку блока, только полупрозрачную заливку или оба варианта.
+config.enum.selectionBox.blockFillMode.OUTLINE_ONLY=Только обводка
+config.enum.selectionBox.blockFillMode.FILL_ONLY=Только заливка
+config.enum.selectionBox.blockFillMode.OUTLINE_AND_FILL=Обводка + заливка
+
+config.name.selectionBox.blockOutlineVisibility=Видимость обводки блока
+config.comment.selectionBox.blockOutlineVisibility=Обводка блока учитывает глубину или рисуется сквозь стены.
+config.enum.selectionBox.blockOutlineVisibility.NORMAL=Обычная
+config.enum.selectionBox.blockOutlineVisibility.THROUGH_WALLS=Сквозь стены
+
+config.name.selectionBox.blockFillVisibility=Видимость заливки блока
+config.comment.selectionBox.blockFillVisibility=Заливка блока учитывает глубину или рисуется сквозь стены.
+config.enum.selectionBox.blockFillVisibility.NORMAL=Обычная
+config.enum.selectionBox.blockFillVisibility.THROUGH_WALLS=Сквозь стены
+
+config.name.selectionBox.blockAnimationMode=Анимация блока
+config.comment.selectionBox.blockAnimationMode=Управляет движением цвета блока и дыханием прозрачности.
+config.enum.selectionBox.blockAnimationMode.ANIMATED=Анимированная
+config.enum.selectionBox.blockAnimationMode.STATIC_GRADIENT=Статичный градиент
+config.enum.selectionBox.blockAnimationMode.BREATHING_ALPHA=Дыхание прозрачности
+config.enum.selectionBox.blockAnimationMode.OFF=Выключена
+
+config.name.selectionBox.entityPreset=Пресет сущностей
+config.comment.selectionBox.entityPreset=Готовый стиль подсветки хитбоксов F3+B. Custom использует ручные настройки сущностей ниже.
+config.enum.selectionBox.entityPreset.CUSTOM=Пользовательский
+config.enum.selectionBox.entityPreset.CLASSIC_BLACK=Классическая черная
+config.enum.selectionBox.entityPreset.RED_BLUE=Красный / синий
+config.enum.selectionBox.entityPreset.RAINBOW=Радуга
+config.enum.selectionBox.entityPreset.LOW_ALPHA=Низкая прозрачность
+config.enum.selectionBox.entityPreset.BOLD=Жирная
+
+config.name.selectionBox.entityColorMode=Режим цвета сущностей
+config.comment.selectionBox.entityColorMode=Градиент анимирует переход между начальным и конечным цветом сущности. Сплошной режим использует одиночный цвет сущности.
+config.enum.selectionBox.entityColorMode.GRADIENT=Градиент
+config.enum.selectionBox.entityColorMode.SOLID=Сплошной
+
+config.name.selectionBox.entitySolidColor=Одиночный цвет сущностей
+config.comment.selectionBox.entitySolidColor=Цвет подсветки сущностей в режиме сплошного цвета.
+
+config.name.selectionBox.entityGradientStartColor=Начало градиента сущностей
+config.comment.selectionBox.entityGradientStartColor=Начальный цвет градиента сущностей.
+
+config.name.selectionBox.entityGradientEndColor=Конец градиента сущностей
+config.comment.selectionBox.entityGradientEndColor=Конечный цвет градиента сущностей. Игнорируется в режиме сплошного цвета.
+
+config.name.selectionBox.entityGradientMode=Режим градиента сущностей
+config.comment.selectionBox.entityGradientMode=Способ интерполяции между начальным и конечным цветом сущностей.
+config.enum.selectionBox.entityGradientMode.RGB=RGB
+config.enum.selectionBox.entityGradientMode.HSV=HSV
+
+config.name.selectionBox.entityCycleSeconds=Цикл сущностей, секунд
+config.comment.selectionBox.entityCycleSeconds=Длительность полного цикла цвета сущностей.
+
+config.name.selectionBox.entityLineWidth=Толщина линии сущностей
+config.comment.selectionBox.entityLineWidth=Толщина линии обводки сущностей.
+
+config.name.selectionBox.entityAlpha=Прозрачность сущностей
+config.comment.selectionBox.entityAlpha=Непрозрачность обводки сущностей. Прозрачность заливки вычисляется из этого значения.
+
+config.name.selectionBox.entityFillMode=Режим заливки сущностей
+config.comment.selectionBox.entityFillMode=Рисовать только обводку сущности, только полупрозрачную заливку или оба варианта.
+config.enum.selectionBox.entityFillMode.OUTLINE_ONLY=Только обводка
+config.enum.selectionBox.entityFillMode.FILL_ONLY=Только заливка
+config.enum.selectionBox.entityFillMode.OUTLINE_AND_FILL=Обводка + заливка
+
+config.name.selectionBox.entityOutlineVisibility=Видимость обводки сущностей
+config.comment.selectionBox.entityOutlineVisibility=Обводка сущностей учитывает глубину или рисуется сквозь стены.
+config.enum.selectionBox.entityOutlineVisibility.NORMAL=Обычная
+config.enum.selectionBox.entityOutlineVisibility.THROUGH_WALLS=Сквозь стены
+
+config.name.selectionBox.entityFillVisibility=Видимость заливки сущностей
+config.comment.selectionBox.entityFillVisibility=Заливка сущностей учитывает глубину или рисуется сквозь стены.
+config.enum.selectionBox.entityFillVisibility.NORMAL=Обычная
+config.enum.selectionBox.entityFillVisibility.THROUGH_WALLS=Сквозь стены
+
+config.name.selectionBox.entityAnimationMode=Анимация сущностей
+config.comment.selectionBox.entityAnimationMode=Управляет движением цвета сущностей и дыханием прозрачности.
+config.enum.selectionBox.entityAnimationMode.ANIMATED=Анимированная
+config.enum.selectionBox.entityAnimationMode.STATIC_GRADIENT=Статичный градиент
+config.enum.selectionBox.entityAnimationMode.BREATHING_ALPHA=Дыхание прозрачности
+config.enum.selectionBox.entityAnimationMode.OFF=Выключена

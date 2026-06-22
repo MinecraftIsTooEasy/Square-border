@@ -2,8 +2,9 @@
   "schemaVersion": 1,
   "id": "selection_box",
   "version": "${version}",
-  "name": "Selected block highlight border",
+  "name": "Square border",
   "description": "可选方块和实体碰撞框的可配置梯度轮廓。",
+  "license": "MIT",
   "authors": [
     "M"
   ],
@@ -22,12 +23,13 @@
     ]
   },
   "mixins": [
-    "selectionbox.mixins.json"
+    "selection_box.mixins.json"
   ],
   "depends": {
     "fishmodloader": ">=3.4.2",
     "minecraft": "1.6.4-mite",
     "java": ">=17",
-    "many-lib": "*"
+    "many-lib": "*",
+    "modmenu": "*"
   }
 }
